@@ -2,8 +2,8 @@
 
 namespace app;
 
-use altayalp\FtpClient\Servers\FtpServer;
-use altayalp\FtpClient\FileFactory;
+//use altayalp\FtpClient\Servers\FtpServer;
+//use altayalp\FtpClient\FileFactory;
 
 class Application
 {
@@ -14,10 +14,15 @@ class Application
 
     public function downloadFtpFile()
     {
-        $server = $this->createFtpServer();
 
-        $file = FileFactory::build($server);
-        $file->download('test.xml', 'test.xml');
+
+
+        $server = $this->createFtpServer();
+        ftp_get($server,'test.xml', 'test.xml', FTP_BINARY);
+        ftp_close($server);
+//
+//        $file = FileFactory::build($server);
+//        $file->download('test.xml', 'test.xml');
     }
 
     /**
@@ -25,9 +30,16 @@ class Application
      */
     public function createFtpServer()
     {
-        $server = new FtpServer('217.147.23.154');
-        $server->login('vacancy', 'vacancy');
-        $server->turnPassive();
+
+        $server = ftp_connect('217.147.23.154');
+        ftp_login($server,'vacancy','vacancy');
+        ftp_pasv($server, true);
+
+
+
+//        $server = new FtpServer('217.147.23.154');
+//        $server->login('vacancy', 'vacancy');
+//        $server->turnPassive();
 
         return $server;
     }

@@ -18,9 +18,6 @@ class Application
 
     }
 
-    /**
-     * @return FtpServer
-     */
     public function createFtpServer()
     {
 

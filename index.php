@@ -9,7 +9,6 @@
 
 use app\Application;
 
-require 'vendor\autoload.php';
 require 'app\application.php';
 
 $application = new Application();
